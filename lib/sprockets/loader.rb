@@ -320,6 +320,9 @@ module Sprockets
         end
         cache.set(key, history.unshift(deps).take(limit))
         asset
+      rescue StandardError
+        @logger.error "Problem fetching asset `#{unloaded.filename}`"
+        raise
       end
   end
 end
